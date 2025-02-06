@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import FormCard from './FormCard';
 import { useAuthContext } from '../../hooks/UseAuthContext';
+import config from '../../config';
 
 const AdoptingRequests = () => {
   const [forms, setForms] = useState([]);
@@ -13,7 +14,7 @@ const AdoptingRequests = () => {
 
   const fetchForms = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:4000/form/getForms', {
+      const response = await fetch(`${config.apiUrl}/form/getForms`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -32,7 +33,7 @@ const AdoptingRequests = () => {
 
   const fetchPets = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:4000/approvedPets',{
+      const response = await fetch(`${config.apiUrl}/pets/approvedPets`,{
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -122,7 +123,7 @@ const AdoptingRequests = () => {
           <div className='popup-content'>
             <div className='pet-view-card'>
               <div className='pet-card-pic'>
-                <img src={`http://localhost:4000/images/${selectedPet.filename}`} alt={selectedPet.name} />
+                <img src={`${config.imageUrl}/images/${selectedPet.filename}`} alt={selectedPet.name} />
               </div>
               <div className='pet-card-details'>
                 <h2>{selectedPet.name}</h2>

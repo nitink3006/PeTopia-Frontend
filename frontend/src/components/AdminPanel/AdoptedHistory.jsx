@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import AdoptedCards from './AdoptedCards';
 import { useAuthContext } from '../../hooks/UseAuthContext';
+import config from '../../config';
 
 const AdoptedHistory = () => {
   const [requests, setRequests] = useState([]);
@@ -9,7 +10,7 @@ const AdoptedHistory = () => {
 
   const fetchAdoptedPets = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:4000/adoptedPets', {
+      const response = await fetch(`${config.apiUrl}/pets/adoptedPets`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

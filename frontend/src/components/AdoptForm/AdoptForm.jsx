@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/UseAuthContext";
+import config from "../../config";
 
 function AdoptForm(props) {
   const {user} = useAuthContext()
@@ -38,7 +39,7 @@ function AdoptForm(props) {
 
       setIsSubmitting(true)
 
-      const response = await fetch('http://localhost:4000/form/save', {
+      const response = await fetch(`${config.apiUrl}/form/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ function AdoptForm(props) {
       <div className="form-pet-container">
         <div className="pet-details">
           <div className="pet-pic">
-            <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
+            <img src={`${config.imageUrl}/images/${props.pet.filename}`} alt={props.pet.name} />
           </div>
           <div className="pet-info">
             <h2>{props.pet.name}</h2>

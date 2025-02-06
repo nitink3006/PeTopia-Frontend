@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import postPet from "./images/postPet.png";
 import { useAuthContext } from "../../hooks/UseAuthContext";
+import config from "../../config";
 
 const PostPetSection = () => {
   const {user} = useAuthContext()
@@ -78,7 +79,7 @@ const PostPetSection = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/services", {
+      const response = await fetch(`${config.apiUrl}/pets/services`, {
         method: "POST",
         headers: {
           'Authorization': `Bearer ${user.token}`
