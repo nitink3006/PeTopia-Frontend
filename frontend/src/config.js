@@ -1,5 +1,5 @@
 const config = {
-    apiUrl:'http://localhost:4000',
+    apiUrl:'https://petopia-backend-hbu1.onrender.com/api',
     };
     
     export default config;
