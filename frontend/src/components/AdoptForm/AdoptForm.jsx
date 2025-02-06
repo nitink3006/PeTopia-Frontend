@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import config from "../../config";
+import { useAuthContext } from "../../hooks/UseAuthContext";
 
 function AdoptForm(props) {
-  const [email, setEmail] = useState("");
+  const {user} = useAuthContext()
+  const [email, setEmail] = useState(user.email);
   const [phoneNo, setPhoneNo] = useState("");
   const [livingSituation, setLivingSituation] = useState("");
   const [previousExperience, setPreviousExperience] = useState("");
@@ -33,19 +34,15 @@ function AdoptForm(props) {
       return;
     }
 
-    if (!isEmailValid(email)) {
-      setEmailError(true);
-      return;
-    }
-
     try {
 
       setIsSubmitting(true)
 
-      const response = await fetch( `${config.apiUrl}/form/save`, {
+      const response = await fetch('http://localhost:4000/form/save', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         },
         body: JSON.stringify({
           email,
@@ -88,7 +85,7 @@ function AdoptForm(props) {
       <div className="form-pet-container">
         <div className="pet-details">
           <div className="pet-pic">
-            <img src={`${config.apiUrl}/images/${props.pet.filename}`} alt={props.pet.name} />
+            <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
           </div>
           <div className="pet-info">
             <h2>{props.pet.name}</h2>
@@ -117,7 +114,6 @@ function AdoptForm(props) {
               <input
                 type="text"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 className="custom-input"
               />
             </div>
