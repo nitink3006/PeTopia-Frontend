@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import config from '../../config';
+import { useAuthContext } from '../../hooks/UseAuthContext';
 
 const PetCards = (props) => {
   const [showJustificationPopup, setShowJustificationPopup] = useState(false);
@@ -9,6 +9,7 @@ const PetCards = (props) => {
   const [showDeletedSuccess, setshowDeletedSuccess] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
+  const { user } = useAuthContext();
 
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) {
@@ -27,13 +28,14 @@ const PetCards = (props) => {
   const handleApprove = async () => {
     setIsApproving(true);
     try {
-      const response = await fetch( `${config.apiUrl}/approving/${props.pet._id}`, {
+      const response = await fetch(`http://localhost:4000/approving/${props.pet._id}`, {
         method: 'PUT',
         body: JSON.stringify({
           status: "Approved"
         }),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         }
       })
 
@@ -52,8 +54,11 @@ const PetCards = (props) => {
   const deleteFormsAdoptedPet = async () => {
     setIsDeleting(true)
     try {
-      const deleteResponses = await fetch( `${config.apiUrl}/form/delete/many/${props.pet._id}`, {
-        method: 'DELETE'
+      const deleteResponses = await fetch(`http://localhost:4000/form/delete/many/${props.pet._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
       });
       if (!deleteResponses.ok) {
         throw new Error('Failed to delete forms');
@@ -66,8 +71,11 @@ const PetCards = (props) => {
 
   const handleReject = async () => {
     try {
-      const response = await fetch( `${config.apiUrl}/delete/${props.pet._id}`, {
-        method: 'DELETE'
+      const response = await fetch(`http://localhost:4000/delete/${props.pet._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
       })
 
       if (!response.ok) {
