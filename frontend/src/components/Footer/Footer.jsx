@@ -4,50 +4,58 @@ import logo from "./images/logo.png";
 
 const Footer = (props) => {
   return (
-    <footer className="footer">
-      <div>
-        <Link className="logo-container" to="/">
-          <img className="navbar-logo" src={logo} alt="PawFinds Logo" />
-          <p>{props.title}</p>
+    <footer className="bg-gray-500 text-black pt-5">
+      {/* Logo and Title */}
+      <div className="flex flex-col items-center justify-center space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
+        <Link className="flex items-center" to="/">
+          <img className="h-12" src={logo} alt="PawFinds Logo" />
+          <p className="ml-2 text-lg sm:text-xl">{props.title}</p>
         </Link>
       </div>
-      <div className="below-footer">
-        <p>
+  
+      {/* Contact Information and Social Links */}
+      <div className="bg-gray-500 text-black py-2.5 text-center leading-6">
+        <p className="text-sm sm:text-base">
           You can reach me at{" "}
-          <a className="mail-links" href="mailto:kashifkzmi5@gmail.com">
+          <a
+            className="text-blue-600 hover:text-blue-800"
+            href="mailto:kashifkzmi5@gmail.com"
+          >
             kashifkzmi5@gmail.com
           </a>
         </p>
-        <p>
+  
+        {/* Social Links */}
+        <p className="mt-2 flex flex-wrap justify-center space-x-4 text-sm sm:text-base">
           <a
-            className="contact-links"
+            className="text-blue-600 hover:text-blue-800"
             href="https://www.linkedin.com/in/kashiekzmi/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fa fa-linkedin-square"></i> Linkedin
           </a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <span className="text-gray-400">|</span>
           <a
-            className="contact-links"
+            className="text-blue-600 hover:text-blue-800"
             href="https://github.com/KaShiekzmi"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fa fa-github"></i> GitHub
           </a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <span className="text-gray-400">|</span>
           <a
-            className="contact-links"
+            className="text-blue-600 hover:text-blue-800"
             href="https://www.instagram.com/kaxhie_x/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fa fa-instagram"></i> Instagram
           </a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <span className="text-gray-400">|</span>
           <a
-            className="contact-links"
+            className="text-blue-600 hover:text-blue-800"
             href="https://api.whatsapp.com/qr/GXRHM7PEPNOKA1?autoload=1&app_absent=0"
             target="_blank"
             rel="noopener noreferrer"
@@ -55,10 +63,13 @@ const Footer = (props) => {
             <i className="fa fa-whatsapp"></i> WhatsApp
           </a>
         </p>
-        <p>&copy; 2023 Kashif Abbas Kazmi</p>
+  
+        {/* Copyright */}
+        <p className="mt-4 text-xs sm:text-sm">
+          &copy; 2023 Kashif Abbas Kazmi
+        </p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
+export default Footer

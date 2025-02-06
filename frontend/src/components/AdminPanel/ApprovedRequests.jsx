@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PetCards from './PetCards';
 import { useAuthContext } from '../../hooks/UseAuthContext';
+import config from '../../config';
 
 const ApprovedRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -9,7 +10,7 @@ const ApprovedRequests = () => {
 
   const fetchRequests = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:4000/approvedPets', {
+      const response = await fetch(`${config.apiUrl}/pets/approvedPets`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

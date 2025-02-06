@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthContext } from './UseAuthContext';
+import config from '../config';
 
 export const useSignup = () => {
   const [signupError, setSignupError] = useState(null);
@@ -11,7 +12,7 @@ export const useSignup = () => {
     setSignupError(null);
 
     try {
-      const otpResponse = await fetch('http://localhost:4000/api/verifyotp', {
+      const otpResponse = await fetch(`${config.apiUrl}/otp/verifyotp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
@@ -22,7 +23,7 @@ export const useSignup = () => {
         setSignupIsLoading(false);
         setSignupError(jsonOtp.error || 'OTP verification failed. Please try again.');
       } else {
-        const response = await fetch('http://localhost:4000/signup', {
+        const response = await fetch(`${config.apiUrl}/users/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password }),

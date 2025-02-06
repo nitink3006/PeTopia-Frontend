@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../../hooks/UseAuthContext';
+import config from '../../config';
 
 const Profile = () => {
     const { user, dispatch } = useAuthContext();
@@ -20,7 +21,7 @@ const Profile = () => {
         const newEmail = tempValues.email.toLowerCase();
 
         try {
-            const response = await fetch('http://localhost:4000/update', {
+            const response = await fetch(`${config.apiUrl}/users/update`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${user.token}`,

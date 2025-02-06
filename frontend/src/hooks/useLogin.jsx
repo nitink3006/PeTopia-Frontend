@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuthContext } from './UseAuthContext';
+import config from '../config';
 
 export const useLogin = () => {
   const [loginError, setloginError] = useState(null);
@@ -11,7 +12,7 @@ export const useLogin = () => {
     setloginError(null);
 
     try {
-      const response = await fetch('http://localhost:4000/login', {
+      const response = await fetch(`${config.apiUrl}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
