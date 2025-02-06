@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
+import config from "../../config";
+
 
 const AdoptedCards = (props) => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -15,7 +17,7 @@ const AdoptedCards = (props) => {
  const handleReject = async () => {
     setIsDeleting(true)
     try {
-      const response = await fetch(`http://localhost:4000/delete/${props.pet._id}`, {
+      const response = await fetch( `${config.apiUrl}/delete/${props.pet._id}`, {
         method: 'DELETE'
       })
 

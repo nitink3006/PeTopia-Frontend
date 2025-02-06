@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
+import config from '../../config';
 
 const FormCard = (props) => {
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -17,7 +18,7 @@ const FormCard = (props) => {
   const handleApprove = async () => {
     setIsApproving(true);
     try {
-      const response = await fetch(`http://localhost:4000/approving/${props.form.petId}`, {
+      const response = await fetch( `${config.apiUrl}/approving/${props.form.petId}`, {
         method: 'PUT',
         body: JSON.stringify({
           email: props.form.email,
@@ -43,7 +44,7 @@ const FormCard = (props) => {
   
   const deleteFormAdoptedPet = async () => {
     try {
-      const deleteResponse = await fetch(`http://localhost:4000/form/delete/many/${props.form.petId}`, {
+      const deleteResponse = await fetch( `${config.apiUrl}/form/delete/many/${props.form.petId}`, {
         method: 'DELETE'
       });
       if (!deleteResponse.ok) {
@@ -59,7 +60,7 @@ const FormCard = (props) => {
   const handleReject = async () => {
     setIsDeleting(true)
     try {
-      const response = await fetch(`http://localhost:4000/form/reject/${props.form._id}`, {
+      const response = await fetch( `${config.apiUrl}/form/reject/${props.form._id}`, {
         method: 'DELETE'
       })
 

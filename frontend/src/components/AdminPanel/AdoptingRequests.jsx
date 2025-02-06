@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FormCard from './FormCard';
+import config from "../../config";
+
 
 const AdoptingRequests = () => {
   const [forms, setForms] = useState([]);
@@ -11,7 +13,7 @@ const AdoptingRequests = () => {
 
   const fetchForms = async () => {
     try {
-      const response = await fetch('http://localhost:4000/form/getForms');
+      const response = await fetch( `${config.apiUrl}/form/getForms`);
       if (!response.ok) {
         throw new Error('An error occurred');
       }
@@ -26,7 +28,7 @@ const AdoptingRequests = () => {
 
   const fetchPets = async () => {
     try {
-      const response = await fetch('http://localhost:4000/approvedPets');
+      const response = await fetch( `${config.apiUrl}/approvedPets`);
       if (!response.ok) {
         throw new Error('An error occurred');
       }

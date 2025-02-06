@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AdoptedCards from './AdoptedCards';
+import config from "../../config";
+
 
 const AdoptedHistory = () => {
   const [requests, setRequests] = useState([]);
@@ -7,7 +9,7 @@ const AdoptedHistory = () => {
 
   const fetchAdoptedPets = async () => {
     try {
-      const response = await fetch('http://localhost:4000/adoptedPets');
+      const response = await fetch( `${config.apiUrl}/adoptedPets`);
       if (!response.ok) {
         throw new Error('An error occurred while fetching adopted pets');
       }
