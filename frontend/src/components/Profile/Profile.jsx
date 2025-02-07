@@ -59,69 +59,50 @@ const Profile = () => {
         setSuccMessage("");
     };
 
-   return (
-        <div className="profile-container">
-            <div className="profile-header">
-                <h2>Profile</h2>
-                {!isEditing ? (
-                    <button className="edit-btn" onClick={handleEditClick}>Edit</button>
-                ) : (
-                    <button className="edit-btn" onClick={handleSave}>Save</button>
-                )}
-            </div>
-            <div className="profile-info">
-                <div className="profile-item">
-                    <label className="profile-label">Name:</label>
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="name"
-                            value={tempValues.name}
-                            onChange={handleChange}
-                            className="edit-input"
-                        />
-                    ) : (
-                        <span className="profile-value">{editValues.name}</span>
-                    )}
-                </div>
-                <div className="profile-item">
-                    <label className="profile-label">Email:</label>
-                    {isEditing ? (
-                        <input
-                            type="email"
-                            name="email"
-                            value={tempValues.email}
-                            onChange={handleChange}
-                            className="edit-input"
-                        />
-                    ) : (
-                        <span className="profile-value">{editValues.email}</span>
-                    )}
-                </div>
-            </div>
-            <br />
-            <div className="password-reset-info">
-                <p>If you want to change your password, please log out and then use the "Forgot Password" feature.</p>
-            </div>
-
-
-            {succMessage.length > 0 && (
-                <div className="profile-errors-container">
-                    <div className="profile-error profile-Succ-msg">
-                        {succMessage}
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-700 via-orange-500 to-yellow-400 p-6 relative">
+            <img src="/left.png" alt="Left Graphic" className="absolute left-10 w-[60vh] h-[70vh] transition-transform duration-500 hover:scale-110" />
+            <img src="/right.png" alt="Right Graphic" className="absolute right-10 w-[60vh] h-[70vh] transition-transform duration-500 hover:scale-110" />
+            <div className="bg-gray-900 shadow-2xl p-8 w-[350px] h-[550px] text-white transform transition-all duration-500 hover:scale-105 animate-pulse flex flex-col items-center border-4 border-orange-500 rounded-3xl relative z-10">
+                <br />
+                <h2 className="text-3xl font-extrabold text-orange-400 animate-pulse mb-6">Profile</h2>
+                <br />
+                <div className="space-y-6 w-full text-center">
+                    <div className="flex flex-col items-center">
+                        <label className="text-gray-400 text-lg">Name</label>
+                        {isEditing ? (
+                            <input type="text" name="name" value={tempValues.name} onChange={handleChange} className="w-3/4 p-3 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all animate-fadeIn rounded-md" />
+                        ) : (
+                            <p className="text-lg font-semibold text-orange-300">{editValues.name}</p>
+                        )}
+                    </div>
+                    <br />
+                    <div className="flex flex-col items-center">
+                        <label className="text-gray-400 text-lg">Email</label>
+                        {isEditing ? (
+                            <input type="email" name="email" value={tempValues.email} onChange={handleChange} className="w-3/4 p-3 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all animate-fadeIn rounded-md" />
+                        ) : (
+                            <p className="text-lg font-semibold text-orange-300">{editValues.email}</p>
+                        )}
                     </div>
                 </div>
-            )}
-
-            {errors.length > 0 && (
-                <div className="profile-errors-container">
-                    {errors.map((error, index) => (
-                        <div key={index} className="profile-error">
-                            {error}
-                        </div>
-                    ))}
-                </div>
-            )}
+                <br />
+                <p className="text-sm text-gray-400 mt-6 animate-fadeIn">To change your password, log out and use "Forgot Password".</p>
+                {succMessage && (
+                    <div className="mt-4 p-3 bg-green-600 text-white text-center text-lg animate-fadeIn rounded-md">{succMessage}</div>
+                )}
+                {errors.length > 0 && (
+                    <div className="mt-4">
+                        {errors.map((error, index) => (
+                            <div key={index} className="p-3 bg-red-600 text-white text-center text-lg animate-fadeIn rounded-md">{error}</div>
+                        ))}
+                    </div>
+                )}
+                <br /><br />
+                <button className="mt-auto bg-orange-500 hover:bg-orange-600 text-white w-[70px] h-[50px] text-lg font-bold shadow-lg transition-all duration-300 hover:scale-110 animate-bounce rounded-md" onClick={isEditing ? handleSave : handleEditClick}>
+                    {isEditing ? "Save" : "Edit"}
+                </button>
+            </div>
         </div>
     );
 };
