@@ -60,13 +60,9 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-orange-700 via-orange-500 to-yellow-400 p-6 relative">
-            <img src="/left.png" alt="Left Graphic" className="absolute left-10 w-[60vh] h-[70vh] transition-transform duration-500 hover:scale-110" />
-            <img src="/right.png" alt="Right Graphic" className="absolute right-10 w-[60vh] h-[70vh] transition-transform duration-500 hover:scale-110" />
-            <div className="bg-gray-900 shadow-2xl p-8 w-[350px] h-[550px] text-white transform transition-all duration-500 hover:scale-105 animate-pulse flex flex-col items-center border-4 border-orange-500 rounded-3xl relative z-10">
-                <br />
+        <div className="min-h-screen flex items-center justify-between bg-cover bg-center p-6 relative" style={{ backgroundImage: "url('/profilebg.jpg')" }}>
+            <div className="bg-cyan-50 shadow-2xl p-12 w-[350px] h-[550px] text-white transform transition-all duration-500 hover:scale-105  flex flex-col items-center rounded-3xl relative z-10 gap-y-5 ">
                 <h2 className="text-3xl font-extrabold text-orange-400 animate-pulse mb-6">Profile</h2>
-                <br />
                 <div className="space-y-6 w-full text-center">
                     <div className="flex flex-col items-center">
                         <label className="text-gray-400 text-lg">Name</label>
@@ -76,7 +72,6 @@ const Profile = () => {
                             <p className="text-lg font-semibold text-orange-300">{editValues.name}</p>
                         )}
                     </div>
-                    <br />
                     <div className="flex flex-col items-center">
                         <label className="text-gray-400 text-lg">Email</label>
                         {isEditing ? (
@@ -86,7 +81,6 @@ const Profile = () => {
                         )}
                     </div>
                 </div>
-                <br />
                 <p className="text-sm text-gray-400 mt-6 animate-fadeIn">To change your password, log out and use "Forgot Password".</p>
                 {succMessage && (
                     <div className="mt-4 p-3 bg-green-600 text-white text-center text-lg animate-fadeIn rounded-md">{succMessage}</div>
@@ -98,11 +92,14 @@ const Profile = () => {
                         ))}
                     </div>
                 )}
-                <br /><br />
                 <button className="mt-auto bg-orange-500 hover:bg-orange-600 text-white w-[70px] h-[50px] text-lg font-bold shadow-lg transition-all duration-300 hover:scale-110 animate-bounce rounded-md" onClick={isEditing ? handleSave : handleEditClick}>
                     {isEditing ? "Save" : "Edit"}
                 </button>
             </div>
+            {/* <div className="flex space-x-10">
+                <img src="/left.png" alt="Left Graphic" className="w-[50vh] h-[60vh] transition-transform duration-500 hover:scale-110" />
+                <img src="/right.png" alt="Right Graphic" className="w-[50vh] h-[60vh]transition-transform duration-500 hover:scale-110" />
+            </div> */}
         </div>
     );
 };
